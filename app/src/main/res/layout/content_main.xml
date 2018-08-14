@@ -18,39 +18,40 @@
             android:background="@color/colorPrimaryDark">
 
         </FrameLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:gravity="center"
+            android:weightSum="100"
             >
                 <FrameLayout
                 android:id="@+id/left_frame"
-                android:layout_width="350dp"
-                android:layout_height="match_parent"
+                android:layout_weight="70"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/right_frame"
                 app:layout_constraintTop_toTopOf="parent"
-                    android:background="@color/colorAccent">
-
-
-                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent" android:layout_height="match_parent"
+                    android:background="@color/colorAccent"
                     >
+
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/left_frame_recycler_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         >
                     </android.support.v7.widget.RecyclerView>
-                </RelativeLayout>
+
 
             </FrameLayout>
 
     <FrameLayout
         android:id="@+id/right_frame"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="30"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/left_frame"
@@ -58,16 +59,14 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/colorPrimary">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent" android:layout_height="match_parent"
-            android:gravity="center">
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/right_frame_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
             </android.support.v7.widget.RecyclerView>
-        </RelativeLayout>
+
     </FrameLayout>
         </LinearLayout>
     </LinearLayout>
