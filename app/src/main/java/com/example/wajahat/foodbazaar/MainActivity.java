@@ -50,6 +50,12 @@ private  LeftMasterAdpater leftMasterAdpater;
         words.add(word);
         word=new Word("Wajeeha");
         words.add(word);
+        word=new Word("Ashar");
+        words.add(word);
+        word=new Word("Rana");
+        words.add(word);
+        word=new Word("Mana");
+        words.add(word);
         leftMasterAdpater.notifyDataSetChanged();
     }
 
