@@ -1,73 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    android:weightSum="100"
+    android:orientation="vertical"
+    >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="20">
         <FrameLayout
             android:id="@+id/top_frame"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/colorAccent">
 
         </FrameLayout>
-
+    </LinearLayout>
+   
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="100"
-            >
-                <FrameLayout
-                android:id="@+id/left_frame"
-                android:layout_weight="70"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/right_frame"
-                app:layout_constraintTop_toTopOf="parent"
-                    android:background="@color/colorAccent"
-                    >
-
+            android:weightSum="100">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:layout_weight="75"
+                android:gravity="center">
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/left_frame_recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+
                         >
                     </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
 
-
-            </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/right_frame"
-        android:layout_width="match_parent"
-        android:layout_weight="30"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/left_frame"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/colorPrimary">
-
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#115544">
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/right_frame_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
             </android.support.v7.widget.RecyclerView>
-
-    </FrameLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+    
+</LinearLayout>

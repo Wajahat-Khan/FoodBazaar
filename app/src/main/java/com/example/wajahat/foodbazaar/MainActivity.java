@@ -56,6 +56,12 @@ private  LeftMasterAdpater leftMasterAdpater;
         words.add(word);
         word=new Word("Mana");
         words.add(word);
+        word=new Word("ABC");
+        words.add(word);
+        word=new Word("ABC");
+        words.add(word);
+        word=new Word("ABC");
+        words.add(word);
         leftMasterAdpater.notifyDataSetChanged();
     }
 
