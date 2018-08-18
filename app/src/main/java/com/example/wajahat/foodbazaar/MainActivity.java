@@ -12,14 +12,19 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.wajahat.foodbazaar.Adapters.LeftMasterAdpater;
+import com.example.wajahat.foodbazaar.Adapters.RightListAdapter;
+import com.example.wajahat.foodbazaar.Data.Items;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 private List<Word> words= new ArrayList<>();
-private RecyclerView recyclerView;
+private List<Items> items=new ArrayList<>();
+private RecyclerView leftRecyclerView;
+private RecyclerView rightRecylcerView;
 private  LeftMasterAdpater leftMasterAdpater;
+private RightListAdapter rightListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +32,17 @@ private  LeftMasterAdpater leftMasterAdpater;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        recyclerView=findViewById(R.id.left_frame_recycler_view);
+        leftRecyclerView=findViewById(R.id.left_frame_recycler_view);
+        rightRecylcerView=findViewById(R.id.right_frame_recycler_view);
+
         leftMasterAdpater=new LeftMasterAdpater(this, words);
-        recyclerView.setAdapter(leftMasterAdpater);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        rightListAdapter=new RightListAdapter(this, items);
+
+        leftRecyclerView.setAdapter(leftMasterAdpater);
+        leftRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        rightRecylcerView.setAdapter(rightListAdapter);
+        rightRecylcerView.setLayoutManager(new LinearLayoutManager(this));
         PrepareData();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -62,7 +74,20 @@ private  LeftMasterAdpater leftMasterAdpater;
         words.add(word);
         word=new Word("ABC");
         words.add(word);
+
+        Items item=new Items(1,"Chicken Burger", "Chicken burger very good.Chicken burger very good.Chicken burger very good.", 125 , null, true, "Chicken burger " +
+                "very good. Chicken burger very good. Chicken burger very good. Chicken burger very good.", null,"chicken burgers","burgers",0,"chicken;bun");
+         items.add(item);
+         item= new
+                 Items(2,"Chicken Zinger", "Chicken burger very good.Chicken burger very good.Chicken burger very good.", 125 , null, true, "Chicken burger " +
+                 "very good. Chicken burger very good. Chicken burger very good. Chicken burger very good.", null,"chicken burgers","burgers",0,"chicken;bun");
+         items.add(item);
+         item=new
+                 Items(3,"Chicken Cheese Burger", "Chicken burger very good.Chicken burger very good.Chicken burger very good.", 125 , null, true, "Chicken burger " +
+                 "very good. Chicken burger very good. Chicken burger very good. Chicken burger very good.", null,"chicken burgers","burgers",0,"chicken;bun");
+
         leftMasterAdpater.notifyDataSetChanged();
+        rightListAdapter.notifyDataSetChanged();
     }
 
     @Override
