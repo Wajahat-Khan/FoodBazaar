@@ -17,15 +17,15 @@ private CategoriesDao categoriesDao;
 private LiveData<List<Items>> allItems;
 private LiveData<List<Categories>> allCategories;
 
-FoodbazaarRepository(Application application){
+public FoodbazaarRepository(Application application){
     FoodbazaarDatabase db=FoodbazaarDatabase.getDatabase(application);
     itemsDao=db.itemsDao();
     categoriesDao=db.categoriesDao();
 }
-LiveData<List<Items>> getAllItems(){
+public LiveData<List<Items>> getAllItems(){
     return  allItems;
 }
-LiveData<List<Categories>> getAllCategories(){
+public LiveData<List<Categories>> getAllCategories(){
     return allCategories;
 }
 public void insert_item(Items item){
