@@ -14,17 +14,20 @@ import android.view.View;
 import com.example.wajahat.foodbazaar.Adapters.LeftMasterAdpater;
 import com.example.wajahat.foodbazaar.Adapters.RightListAdapter;
 import com.example.wajahat.foodbazaar.Data.Items;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-private List<Word> words= new ArrayList<>();
 private List<Items> items=new ArrayList<>();
 private RecyclerView leftRecyclerView;
 private RecyclerView rightRecylcerView;
 private  LeftMasterAdpater leftMasterAdpater;
 private RightListAdapter rightListAdapter;
+private FirebaseDatabase firebaseDatabase;
+private DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +38,8 @@ private RightListAdapter rightListAdapter;
         leftRecyclerView=findViewById(R.id.left_frame_recycler_view);
         rightRecylcerView=findViewById(R.id.right_frame_recycler_view);
 
-        leftMasterAdpater=new LeftMasterAdpater(this, words);
+
+        leftMasterAdpater=new LeftMasterAdpater(this, items);
         rightListAdapter=new RightListAdapter(this, items);
 
         leftRecyclerView.setAdapter(leftMasterAdpater);
@@ -58,22 +62,7 @@ private RightListAdapter rightListAdapter;
 
     }
     private void PrepareData(){
-        Word word=new Word("Wajahat");
-        words.add(word);
-        word=new Word("Wajeeha");
-        words.add(word);
-        word=new Word("Ashar");
-        words.add(word);
-        word=new Word("Rana");
-        words.add(word);
-        word=new Word("Mana");
-        words.add(word);
-        word=new Word("ABC");
-        words.add(word);
-        word=new Word("ABC");
-        words.add(word);
-        word=new Word("ABC");
-        words.add(word);
+
 
         Items item=new Items(1,"Chicken Burger", "Chicken burger very good.Chicken burger very good.Chicken burger very good.", 125 , null, true, "Chicken burger " +
                 "very good. Chicken burger very good. Chicken burger very good. Chicken burger very good.", null,"chicken burgers","burgers",0,"chicken;bun");

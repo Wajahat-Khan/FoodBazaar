@@ -1,20 +1,25 @@
 package com.example.wajahat.foodbazaar.Data;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity
 public class Items {
-private int id;
-private String name;
+    @PrimaryKey
+    private int id;
+    private String name;
 private String short_description;
 private String long_description;
-private float price;
+private int price;
 private boolean is_avail;
 private String picture;
 private String video;
-private String category;
+private String sub_category;
 private String major_category;
 private float rating;
 private String ingredients;
 
-public Items(int id, String name, String short_description, float price, String picture, boolean is_avail, String long_description, String video,
+public Items(int id, String name, String short_description, int price, String picture, boolean is_avail, String long_description, String video,
              String category, String major_category, float rating, String ingredients){
     this.id=id;
     this.name=name;
@@ -24,7 +29,7 @@ public Items(int id, String name, String short_description, float price, String 
     this.is_avail=is_avail;
     this.long_description=long_description;
     this.video=video;
-    this.category=category;
+    this.sub_category=category;
     this.major_category=major_category;
     this.rating=rating;
     this.ingredients=ingredients;
@@ -66,7 +71,7 @@ public Items(int id, String name, String short_description, float price, String 
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -94,12 +99,12 @@ public Items(int id, String name, String short_description, float price, String 
         this.video = video;
     }
 
-    public String getCategory() {
-        return category;
+    public String getSub_category() {
+        return sub_category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setSub_category(String sub_category) {
+        this.sub_category = sub_category;
     }
 
     public String getMajor_category() {

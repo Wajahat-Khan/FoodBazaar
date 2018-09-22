@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.wajahat.foodbazaar.Data.Items;
 import com.example.wajahat.foodbazaar.R;
-import com.example.wajahat.foodbazaar.Word;
 
 import java.util.List;
 
@@ -22,14 +22,14 @@ public class LeftMasterAdpater extends RecyclerView.Adapter<LeftMasterAdpater.Ma
         }
 
     }
-    private List<Word> words;
+    private List<Items> items;
     private final LayoutInflater inflater;
 
-    public LeftMasterAdpater(Context context, List<Word> w){
+    public LeftMasterAdpater(Context context, List<Items> item){
         //Toast.makeText(context, "valled"+getItemCount(), Toast.LENGTH_SHORT).show();
         inflater=LayoutInflater.from(context);
-        words=w;
-         }
+        items=item;
+    }
 
     @Override
     public LeftMasterAdpater.MasterViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
@@ -39,9 +39,9 @@ public class LeftMasterAdpater extends RecyclerView.Adapter<LeftMasterAdpater.Ma
 
     @Override
     public void onBindViewHolder( MasterViewHolder holder, int position) {
-        if(words!=null) {
-            Word wo = words.get(position);
-            holder.btn.setText(wo.getWord().toString());
+        if(items!=null) {
+            Items i = items.get(position);
+            holder.btn.setText(i.getName().toString());
         }
         else
         {
@@ -51,8 +51,8 @@ public class LeftMasterAdpater extends RecyclerView.Adapter<LeftMasterAdpater.Ma
 
     @Override
     public int getItemCount() {
-        if(words!=null){
-            return words.size();
+        if(items!=null){
+            return items.size();
         }
         else return 0;
     }

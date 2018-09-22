@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "898326193345",
+    "firebase_url": "https://foodbaazaar.firebaseio.com",
+    "project_id": "foodbaazaar",
+    "storage_bucket": "foodbaazaar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898326193345:android:4efdb6258834c752",
+        "android_client_info": {
+          "package_name": "com.example.wajahat.foodbazaar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898326193345-r0rhcevvuso39fcphanine5kpbh9rgk8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wajahat.foodbazaar",
+            "certificate_hash": "55a259c21c30816b11832d3488f8ee94c2180c4a"
+          }
+        },
+        {
+          "client_id": "898326193345-noc7okclrhklneihm6d2ps5ggojfgidm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOkf4pD64Mxv2ydw2iKmFEOe-k6DAyz_s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898326193345-noc7okclrhklneihm6d2ps5ggojfgidm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
