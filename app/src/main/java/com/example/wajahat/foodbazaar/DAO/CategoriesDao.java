@@ -1,5 +1,6 @@
 package com.example.wajahat.foodbazaar.DAO;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
@@ -15,7 +16,7 @@ public interface CategoriesDao {
     public void insert(Categories categories);
 
     @Query("Select * from Categories")
-    public List<Categories> getAllCategories();
+    public LiveData<List<Categories>> getAllCategories();
 
     @Query("SELECT * FROM Categories WHERE id like :id")
     public Categories getCategoryById(int id);
