@@ -19,17 +19,17 @@ private String major_category;
 private float rating;
 private String ingredients;
 
-public Items(int id, String name, String short_description, int price, String picture, boolean is_avail, String long_description, String video,
-             String category, String major_category, float rating, String ingredients){
+public Items(int id, String name,String short_description,String long_description, int price, boolean is_avail,String picture,String video,
+             String sub_category,String major_category,float rating,String ingredients){
     this.id=id;
     this.name=name;
     this.short_description=short_description;
-    this.price=price;
-    this.picture=picture;
-    this.is_avail=is_avail;
     this.long_description=long_description;
+    this.price=price;
+    this.is_avail=is_avail;
+    this.picture=picture;
     this.video=video;
-    this.sub_category=category;
+    this.sub_category=sub_category;
     this.major_category=major_category;
     this.rating=rating;
     this.ingredients=ingredients;
@@ -67,7 +67,7 @@ public Items(int id, String name, String short_description, int price, String pi
         this.long_description = long_description;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
