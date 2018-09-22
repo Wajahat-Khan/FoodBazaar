@@ -64,17 +64,6 @@ private DatabaseReference databaseReference;
     private void PrepareData(){
 
 
-        Items item=new Items(1,"Chicken Burger", "Chicken burger very good.Chicken burger very good.Chicken burger very good.", 125 , null, true, "Chicken burger " +
-                "very good. Chicken burger very good. Chicken burger very good. Chicken burger very good.", null,"chicken burgers","burgers",0,"chicken;bun");
-         items.add(item);
-         item= new
-                 Items(2,"Chicken Zinger", "Chicken burger very good.Chicken burger very good.Chicken burger very good.", 125 , null, true, "Chicken burger " +
-                 "very good. Chicken burger very good. Chicken burger very good. Chicken burger very good.", null,"chicken burgers","burgers",0,"chicken;bun");
-         items.add(item);
-         item=new
-                 Items(3,"Chicken Cheese Burger", "Chicken burger very good.Chicken burger very good.Chicken burger very good.", 125 , null, true, "Chicken burger " +
-                 "very good. Chicken burger very good. Chicken burger very good. Chicken burger very good.", null,"chicken burgers","burgers",0,"chicken;bun");
-
         leftMasterAdpater.notifyDataSetChanged();
         rightListAdapter.notifyDataSetChanged();
     }
