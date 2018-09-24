@@ -18,7 +18,7 @@ public interface ItemsDao {
     LiveData<List<Items>> getAllItems();
 
 @Query("Delete  from Items")
-    public void delete_all();
+    public void deleteAll();
 
 @Query("SELECT * FROM Items WHERE id like :id")
     public Items getItemById(int id);
