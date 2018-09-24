@@ -14,8 +14,11 @@ public interface ItemsDao {
 @Insert
     public void insert(Items item);
 
-@Query("Select * from Items")
+    @Query("Select * from Items")
     LiveData<List<Items>> getAllItems();
+
+@Query("Delete  from Items")
+    public void delete_all();
 
 @Query("SELECT * FROM Items WHERE id like :id")
     public Items getItemById(int id);

@@ -1,6 +1,9 @@
 package com.example.wajahat.foodbazaar;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +17,7 @@ import android.view.View;
 import com.example.wajahat.foodbazaar.Adapters.LeftMasterAdpater;
 import com.example.wajahat.foodbazaar.Adapters.RightListAdapter;
 import com.example.wajahat.foodbazaar.Data.Items;
+import com.example.wajahat.foodbazaar.ViewModels.ItemsViewModel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,6 +30,9 @@ private RecyclerView leftRecyclerView;
 private RecyclerView rightRecylcerView;
 private  LeftMasterAdpater leftMasterAdpater;
 private RightListAdapter rightListAdapter;
+private ItemsViewModel itemsViewModel;
+
+
 private FirebaseDatabase firebaseDatabase;
 private DatabaseReference databaseReference;
     @Override
@@ -34,20 +41,18 @@ private DatabaseReference databaseReference;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        leftRecyclerView=findViewById(R.id.left_frame_recycler_view);
+       // leftRecyclerView=findViewById(R.id.left_frame_recycler_view);
         rightRecylcerView=findViewById(R.id.right_frame_recycler_view);
 
 
-        leftMasterAdpater=new LeftMasterAdpater(this, items);
-        rightListAdapter=new RightListAdapter(this, items);
+       // leftMasterAdpater=new LeftMasterAdpater(this, items);
+        final RightListAdapter rightListAdapter  = new RightListAdapter(this);
 
-        leftRecyclerView.setAdapter(leftMasterAdpater);
-        leftRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //leftRecyclerView.setAdapter(leftMasterAdpater);
+        //leftRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         rightRecylcerView.setAdapter(rightListAdapter);
         rightRecylcerView.setLayoutManager(new LinearLayoutManager(this));
-        PrepareData();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -57,17 +62,26 @@ private DatabaseReference databaseReference;
                         .setAction("Action", null).show();
             }
         });
-
-
+        itemsViewModel = ViewModelProviders.of(this).get(ItemsViewModel.class);
+        itemsViewModel.getAllWords().observe(this, new Observer<List<Items>>() {
+            @Override
+            public void onChanged(@Nullable List<Items> items) {
+                rightListAdapter.setItems(items);
+            }
+        });
 
     }
-    private void PrepareData(){
 
+public void prepare_data(){
 
-        leftMasterAdpater.notifyDataSetChanged();
-        rightListAdapter.notifyDataSetChanged();
-    }
-
+    Items item = new Items(1,"ChickenBurger","a good burger","A very good burger. good burger",250,true,null
+            ,null,"chicken","burgers",4,"chicken,bun,salad");
+    items.add(item);
+        item = new Items(1,"Beef Burger","a good burger","A very good burger. good burger",250,true,null
+            ,null,"chicken","burgers",4,"chicken,bun,salad");
+        items.add(item);
+        rightListAdapter.setItems(items);
+}
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
