@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.example.wajahat.foodbazaar.Adapters.LeftMasterAdpater;
 import com.example.wajahat.foodbazaar.Adapters.RightListAdapter;
+import com.example.wajahat.foodbazaar.Data.Categories;
 import com.example.wajahat.foodbazaar.Data.Items;
 import com.example.wajahat.foodbazaar.ViewModels.ItemsViewModel;
 import com.google.firebase.database.DatabaseReference;
@@ -41,18 +42,18 @@ private DatabaseReference databaseReference;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       // leftRecyclerView=findViewById(R.id.left_frame_recycler_view);
+
         rightRecylcerView=findViewById(R.id.right_frame_recycler_view);
+        leftRecyclerView=findViewById(R.id.left_frame_recycler_view);
 
-
-       // leftMasterAdpater=new LeftMasterAdpater(this, items);
         final RightListAdapter rightListAdapter  = new RightListAdapter(this);
-
-        //leftRecyclerView.setAdapter(leftMasterAdpater);
-        //leftRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         rightRecylcerView.setAdapter(rightListAdapter);
         rightRecylcerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        final LeftMasterAdpater leftMasterAdpater  = new LeftMasterAdpater(this);
+        leftRecyclerView.setAdapter(leftMasterAdpater);
+        leftRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -63,25 +64,23 @@ private DatabaseReference databaseReference;
             }
         });
         itemsViewModel = ViewModelProviders.of(this).get(ItemsViewModel.class);
-        itemsViewModel.getAllWords().observe(this, new Observer<List<Items>>() {
+
+        itemsViewModel.getAllItems().observe(this, new Observer<List<Items>>() {
             @Override
             public void onChanged(@Nullable List<Items> items) {
                 rightListAdapter.setItems(items);
             }
         });
 
+        itemsViewModel.getAllCategories().observe(this, new Observer<List<Categories>>() {
+            @Override
+            public void onChanged(@Nullable List<Categories> categories) {
+                leftMasterAdpater.setCategories(categories);
+            }
+        });
+
     }
 
-public void prepare_data(){
-
-    Items item = new Items(1,"ChickenBurger","a good burger","A very good burger. good burger",250,true,null
-            ,null,"chicken","burgers",4,"chicken,bun,salad");
-    items.add(item);
-        item = new Items(1,"Beef Burger","a good burger","A very good burger. good burger",250,true,null
-            ,null,"chicken","burgers",4,"chicken,bun,salad");
-        items.add(item);
-        rightListAdapter.setItems(items);
-}
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
