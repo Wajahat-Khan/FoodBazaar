@@ -23,7 +23,7 @@ public abstract class FoodbazaarDatabase extends RoomDatabase {
         if(Instance==null){
             synchronized (FoodbazaarDatabase.class){
                 if(Instance==null){
-                    Instance= Room.databaseBuilder(context.getApplicationContext(),FoodbazaarDatabase.class,"foodbazaar").addCallback(sRoomDatabaseCallback).build();
+                    Instance= Room.databaseBuilder(context.getApplicationContext(),FoodbazaarDatabase.class,"foodbazaar").build();
                 }
             }
         }

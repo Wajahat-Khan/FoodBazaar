@@ -7,12 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.wajahat.foodbazaar.Adapters.LeftMasterAdpater;
 import com.example.wajahat.foodbazaar.Adapters.RightListAdapter;
@@ -46,14 +48,22 @@ private DatabaseReference databaseReference;
         rightRecylcerView=findViewById(R.id.right_frame_recycler_view);
         leftRecyclerView=findViewById(R.id.left_frame_recycler_view);
 
-        final RightListAdapter rightListAdapter  = new RightListAdapter(this);
+        final RightListAdapter rightListAdapter  = new RightListAdapter(this, new RightListAdapter.MyAdapterListener() {
+            @Override
+            public void onClick(View view, int position, List<Items> it) {
+               items=it;
+               Items item1=items.get(position);
+                Toast.makeText(MainActivity.this, item1.getPrice()+"selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+                rightRecylcerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         rightRecylcerView.setAdapter(rightListAdapter);
         rightRecylcerView.setLayoutManager(new LinearLayoutManager(this));
-
 
         final LeftMasterAdpater leftMasterAdpater  = new LeftMasterAdpater(this);
         leftRecyclerView.setAdapter(leftMasterAdpater);
         leftRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +79,8 @@ private DatabaseReference databaseReference;
             @Override
             public void onChanged(@Nullable List<Items> items) {
                 rightListAdapter.setItems(items);
+                items=rightListAdapter.getItems();
+
             }
         });
 
@@ -76,6 +88,7 @@ private DatabaseReference databaseReference;
             @Override
             public void onChanged(@Nullable List<Categories> categories) {
                 leftMasterAdpater.setCategories(categories);
+
             }
         });
 
