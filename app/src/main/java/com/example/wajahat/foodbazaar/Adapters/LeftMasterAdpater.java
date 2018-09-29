@@ -18,9 +18,9 @@ public class LeftMasterAdpater extends RecyclerView.Adapter<LeftMasterAdpater.Le
         private Button cat_button;
         public LeftViewHolder(View catView) {
             super(catView);
+
             cat_button=catView.findViewById(R.id.left_item_btn);
         }
-
     }
     private final LayoutInflater inflater;
     private List<Categories> categories;
