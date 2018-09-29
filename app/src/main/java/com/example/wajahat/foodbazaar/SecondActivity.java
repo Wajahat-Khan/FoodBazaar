@@ -32,7 +32,7 @@ private LeftMasterAdpater leftMasterAdpater;
 private RightListAdapter rightListAdapter;
 
     private ItemsViewModel itemsViewModel;
-    private List<Categories> allCategories=new ArrayList<>();
+    private List<String> allCategories=new ArrayList<>();
     /*
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -75,13 +75,16 @@ private RightListAdapter rightListAdapter;
         });
         itemsViewModel.getAllCategories().observe(this, new Observer<List<Categories>>() {
             @Override
-            public void onChanged(@Nullable List<Categories> categories) {
-                leftMasterAdpater.setCategories(categories);
+            public void onChanged(@Nullable List<Categories> cats) {
+                String[] subCategories=getIntent().getStringArrayExtra("subCategories");
+                leftMasterAdpater.setCategories(subCategories);
 
             }
         });
 
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
