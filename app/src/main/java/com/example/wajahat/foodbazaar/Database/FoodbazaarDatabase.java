@@ -59,7 +59,7 @@ public abstract class FoodbazaarDatabase extends RoomDatabase {
                     ,null,"chicken","burgers",4,"chicken,bun,salad");
             itemsDao.insert(item);
 
-            Categories categories=new Categories(1,"Burgers","Chicken Burger,Beef Burger,Fish Burger");
+            Categories categories=new Categories(1,"Starters","Chicken Burger,Beef Burger,Fish Burger");
             categoriesDao.insert(categories);
             categories=new Categories(2,"Sandwiches","Chicken Sandwich,Beef Sandwich,Fish Sandwich");
             categoriesDao.insert(categories);
