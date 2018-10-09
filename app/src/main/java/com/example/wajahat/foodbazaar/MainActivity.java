@@ -1,5 +1,6 @@
 package com.example.wajahat.foodbazaar;
 
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -15,12 +16,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.wajahat.foodbazaar.Adapters.StartCategoriesAdapter;
 import com.example.wajahat.foodbazaar.Data.Categories;
 import com.example.wajahat.foodbazaar.ViewModels.ItemsViewModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +37,7 @@ private RightListAdapter rightListAdapter;
 */
 private ItemsViewModel itemsViewModel;
 private List<Categories> allCategories=new ArrayList<>();
+
 /*
 private FirebaseDatabase firebaseDatabase;
 private DatabaseReference databaseReference;
@@ -58,7 +62,7 @@ private  RecyclerView categoriesrecyclerView;
                 String subCategories[]=subCats.split(",");
                 Intent intent=new Intent(getBaseContext(),SecondActivity.class);
                 intent.putExtra("subCategories",subCategories);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
 
             @Override
@@ -70,28 +74,7 @@ private  RecyclerView categoriesrecyclerView;
         categoriesrecyclerView.setLayoutManager(new LinearLayoutManager(this));
         categoriesrecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
-        /*
-        rightRecylcerView=findViewById(R.id.right_frame_recycler_view);
-        leftRecyclerView=findViewById(R.id.left_frame_recycler_view);
 
-        final RightListAdapter rightListAdapter  = new RightListAdapter(this, new RightListAdapter.MyAdapterListener() {
-            @Override
-            public void onClick(View view, int position, List<Items> it) {
-               items=it;
-               Items temp=items.get(position);
-               ordered_items.add(temp);
-                Snackbar.make(view, temp.getName() + "ordered", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
-                rightRecylcerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        rightRecylcerView.setAdapter(rightListAdapter);
-        rightRecylcerView.setLayoutManager(new LinearLayoutManager(this));
-
-        final LeftMasterAdpater leftMasterAdpater  = new LeftMasterAdpater(this);
-        leftRecyclerView.setAdapter(leftMasterAdpater);
-        leftRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-*/
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,16 +85,7 @@ private  RecyclerView categoriesrecyclerView;
         });
 
         itemsViewModel = ViewModelProviders.of(this).get(ItemsViewModel.class);
-/*
-        itemsViewModel.getAllItems().observe(this, new Observer<List<Items>>() {
-            @Override
-            public void onChanged(@Nullable List<Items> items) {
-                rightListAdapter.setItems(items);
-                items=rightListAdapter.getItems();
 
-            }
-        });
-*/
         itemsViewModel.getAllCategories().observe(this, new Observer<List<Categories>>() {
             @Override
             public void onChanged(@Nullable List<Categories> categories) {
@@ -120,6 +94,18 @@ private  RecyclerView categoriesrecyclerView;
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1){
+            if(resultCode== Activity.RESULT_OK){
+                HashMap<Integer, Integer> order_items = (HashMap<Integer, Integer>) getIntent().getSerializableExtra("order_items");
+                System.out.println(order_items.size());
+               Toast.makeText(this, "got  it", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override

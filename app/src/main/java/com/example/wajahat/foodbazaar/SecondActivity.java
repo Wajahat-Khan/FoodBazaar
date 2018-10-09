@@ -1,7 +1,9 @@
 package com.example.wajahat.foodbazaar;
 
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -20,19 +22,21 @@ import com.example.wajahat.foodbazaar.Data.Items;
 import com.example.wajahat.foodbazaar.ViewModels.ItemsViewModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SecondActivity extends AppCompatActivity {
 
     private List<Items> items=new ArrayList<>();
-private List<Items> ordered_items=new ArrayList<>();
+
 private RecyclerView leftRecyclerView;
 private RecyclerView rightRecylcerView;
 private LeftMasterAdpater leftMasterAdpater;
 private RightListAdapter rightListAdapter;
 
     private ItemsViewModel itemsViewModel;
-    private List<Categories> allCategories=new ArrayList<>();
+    private  HashMap<Integer,Integer> order_items=new HashMap<>();
+    final int default_quantity=1;
     /*
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -42,16 +46,24 @@ private RightListAdapter rightListAdapter;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
 
+
         rightRecylcerView=findViewById(R.id.right_frame_recycler_view);
         leftRecyclerView=findViewById(R.id.left_frame_recycler_view);
 
-        final RightListAdapter rightListAdapter  = new RightListAdapter(this, new RightListAdapter.MyAdapterListener() {
+        rightListAdapter  = new RightListAdapter(this, new RightListAdapter.MyAdapterListener() {
             @Override
             public void onClick(View view, int position, List<Items> it) {
                items=it;
                Items temp=items.get(position);
-               ordered_items.add(temp);
-                Snackbar.make(view, temp.getName() + "ordered", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+               if(order_items.containsKey(temp.getId())) {
+                    int curr=order_items.get(temp.getId());
+                    curr++;
+                    order_items.put(temp.getId(),curr);
+               }
+               else
+               {order_items.put(temp.getId(),default_quantity);
+               }
+                Snackbar.make(view, temp.getName() + "ordered" + order_items.get(temp.getId())+ "times", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
                 rightRecylcerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -63,23 +75,42 @@ private RightListAdapter rightListAdapter;
         leftRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-
         itemsViewModel = ViewModelProviders.of(this).get(ItemsViewModel.class);
         itemsViewModel.getAllItems().observe(this, new Observer<List<Items>>() {
             @Override
             public void onChanged(@Nullable List<Items> items) {
                 rightListAdapter.setItems(items);
-                items=rightListAdapter.getItems();
+
 
             }
         });
         itemsViewModel.getAllCategories().observe(this, new Observer<List<Categories>>() {
             @Override
-            public void onChanged(@Nullable List<Categories> categories) {
-                leftMasterAdpater.setCategories(categories);
+            public void onChanged(@Nullable List<Categories> cats) {
+                String[] subCategories=getIntent().getStringArrayExtra("subCategories");
+                leftMasterAdpater.setCategories(subCategories);
 
             }
         });
+
+        findViewById(R.id.order_now).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getBaseContext(),SecondActivity.class);
+                intent.putExtra("order_items", order_items);
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent();
+        intent.putExtra("order_items",order_items);
+        setResult(Activity.RESULT_OK,intent);
+        finish();
+        super.onBackPressed();
 
     }
 

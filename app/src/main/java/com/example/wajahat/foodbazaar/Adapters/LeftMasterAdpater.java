@@ -7,10 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.wajahat.foodbazaar.Data.Categories;
 import com.example.wajahat.foodbazaar.R;
-
-import java.util.List;
 
 public class LeftMasterAdpater extends RecyclerView.Adapter<LeftMasterAdpater.LeftViewHolder> {
 
@@ -23,7 +20,7 @@ public class LeftMasterAdpater extends RecyclerView.Adapter<LeftMasterAdpater.Le
         }
     }
     private final LayoutInflater inflater;
-    private List<Categories> categories;
+    private String[] categories;
     public LeftMasterAdpater(Context context){
         inflater=LayoutInflater.from(context);
     }
@@ -36,12 +33,12 @@ public class LeftMasterAdpater extends RecyclerView.Adapter<LeftMasterAdpater.Le
     @Override
     public void onBindViewHolder(LeftMasterAdpater.LeftViewHolder holder, int position) {
         if(categories!=null){
-            Categories current=categories.get(position);
-            holder.cat_button.setText(current.getName().toString());
+            String current=categories[position];
+            holder.cat_button.setText(current);
         }
 
     }
-    public void setCategories(List<Categories> categories){
+    public void setCategories(String[] categories){
         this.categories=categories;
         notifyDataSetChanged();
     }
@@ -49,7 +46,7 @@ public class LeftMasterAdpater extends RecyclerView.Adapter<LeftMasterAdpater.Le
     @Override
     public int getItemCount() {
         if(categories!=null){
-            return categories.size();
+            return categories.length;
         }
         else return 0;
     }

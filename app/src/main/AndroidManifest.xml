@@ -20,8 +20,10 @@
             </intent-filter>
 
         </activity>
+
         <activity android:name=".SecondActivity"
             android:screenOrientation="landscape"></activity>
+
 
     </application>
 
