@@ -19,6 +19,7 @@ import com.example.wajahat.foodbazaar.Adapters.LeftMasterAdpater;
 import com.example.wajahat.foodbazaar.Adapters.RightListAdapter;
 import com.example.wajahat.foodbazaar.Data.Categories;
 import com.example.wajahat.foodbazaar.Data.Items;
+import com.example.wajahat.foodbazaar.Data.Order;
 import com.example.wajahat.foodbazaar.ViewModels.ItemsViewModel;
 
 import java.util.ArrayList;
@@ -35,7 +36,8 @@ private LeftMasterAdpater leftMasterAdpater;
 private RightListAdapter rightListAdapter;
 
     private ItemsViewModel itemsViewModel;
-    private  HashMap<Integer,Integer> order_items=new HashMap<>();
+    private  HashMap<Integer,Integer> order_items_map=new HashMap<>();
+    Order order_object=new Order();
     final int default_quantity=1;
     /*
     private FirebaseDatabase firebaseDatabase;
@@ -45,7 +47,10 @@ private RightListAdapter rightListAdapter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
-
+        Intent intent=getIntent();
+        Bundle bundle=intent.getExtras();
+        order_object=(Order) bundle.getSerializable("order_list");
+        order_items_map=order_object.getOrder_list();
 
         rightRecylcerView=findViewById(R.id.right_frame_recycler_view);
         leftRecyclerView=findViewById(R.id.left_frame_recycler_view);
@@ -55,15 +60,15 @@ private RightListAdapter rightListAdapter;
             public void onClick(View view, int position, List<Items> it) {
                items=it;
                Items temp=items.get(position);
-               if(order_items.containsKey(temp.getId())) {
-                    int curr=order_items.get(temp.getId());
+               if(order_items_map.containsKey(temp.getId())) {
+                    int curr=order_items_map.get(temp.getId());
                     curr++;
-                    order_items.put(temp.getId(),curr);
+                    order_items_map.put(temp.getId(),curr);
                }
                else
-               {order_items.put(temp.getId(),default_quantity);
+               {order_items_map.put(temp.getId(),default_quantity);
                }
-                Snackbar.make(view, temp.getName() + "ordered" + order_items.get(temp.getId())+ "times", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Snackbar.make(view, temp.getName() + "ordered" + order_items_map.get(temp.getId())+ "times", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
                 rightRecylcerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -97,7 +102,7 @@ private RightListAdapter rightListAdapter;
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getBaseContext(),SecondActivity.class);
-                intent.putExtra("order_items", order_items);
+                intent.putExtra("order_items_map", order_items_map);
             }
         });
 
@@ -106,8 +111,9 @@ private RightListAdapter rightListAdapter;
 
     @Override
     public void onBackPressed() {
+        order_object.setOrder_list(order_items_map);
         Intent intent=new Intent();
-        intent.putExtra("order_items",order_items);
+        intent.putExtra("order_list",order_object);
         setResult(Activity.RESULT_OK,intent);
         finish();
         super.onBackPressed();

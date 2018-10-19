@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.wajahat.foodbazaar.Adapters.StartCategoriesAdapter;
 import com.example.wajahat.foodbazaar.Data.Categories;
+import com.example.wajahat.foodbazaar.Data.Order;
 import com.example.wajahat.foodbazaar.ViewModels.ItemsViewModel;
 
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ private RightListAdapter rightListAdapter;
 */
 private ItemsViewModel itemsViewModel;
 private List<Categories> allCategories=new ArrayList<>();
+    private  HashMap<Integer,Integer> order_items_map=new HashMap<>();
+    Order order_object=new Order();
 
 /*
 private FirebaseDatabase firebaseDatabase;
@@ -61,6 +64,7 @@ private  RecyclerView categoriesrecyclerView;
                 String subCats=temp.getSub_categories();
                 String subCategories[]=subCats.split(",");
                 Intent intent=new Intent(getBaseContext(),SecondActivity.class);
+                intent.putExtra("order_list",order_object);
                 intent.putExtra("subCategories",subCategories);
                 startActivityForResult(intent, 1);
             }
@@ -101,10 +105,18 @@ private  RecyclerView categoriesrecyclerView;
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1){
             if(resultCode== Activity.RESULT_OK){
-                HashMap<Integer, Integer> order_items = (HashMap<Integer, Integer>) getIntent().getSerializableExtra("order_items");
-                System.out.println(order_items.size());
-               Toast.makeText(this, "got  it", Toast.LENGTH_SHORT).show();
-            }
+                    Bundle bundle=data.getExtras();
+                    if(bundle!=null){
+                        order_object=(Order) bundle.getSerializable("order_list");
+                        order_items_map=order_object.getOrder_list();
+                        Toast.makeText(this, "order list is : " +order_items_map.get(3), Toast.LENGTH_SHORT).show();
+
+
+                    }
+                    else{
+                        Toast.makeText(this, "no data", Toast.LENGTH_SHORT).show();
+                    }
+               }
         }
     }
 
