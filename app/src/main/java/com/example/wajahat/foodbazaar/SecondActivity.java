@@ -1,8 +1,11 @@
 package com.example.wajahat.foodbazaar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,9 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.wajahat.foodbazaar.Adapters.LeftMasterAdpater;
 import com.example.wajahat.foodbazaar.Adapters.RightListAdapter;
@@ -99,11 +107,40 @@ private RightListAdapter rightListAdapter;
         });
 
         findViewById(R.id.order_now).setOnClickListener(new View.OnClickListener() {
+                String table_no="";
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getBaseContext(),SecondActivity.class);
-                intent.putExtra("order_items_map", order_items_map);
-            }
+                AlertDialog.Builder dialog=new AlertDialog.Builder(SecondActivity.this);
+                final EditText editText = new EditText(SecondActivity.this);
+                editText.setInputType(InputType.TYPE_CLASS_PHONE);
+                editText.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+                dialog.setTitle("Table No: ")
+                        .setPositiveButton("ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(SecondActivity.this, editText.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                            }
+                        });
+
+                dialog.setNegativeButton("cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                            }
+                        });
+
+                dialog.setView(editText);
+                dialog.create().show();
+
+                editText.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+                }
         });
 
 
