@@ -122,6 +122,10 @@ private RightListAdapter rightListAdapter;
 
                                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                                order_object.setTable_no(Integer.parseInt(editText.getText().toString()));
+                                Intent intent=new Intent(getBaseContext(),OrderActivity.class);
+                                intent.putExtra("order_list",order_object);
+                                startActivity(intent);
                             }
                         });
 
