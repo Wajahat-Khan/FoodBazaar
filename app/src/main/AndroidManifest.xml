@@ -24,6 +24,8 @@
         <activity android:name=".SecondActivity"
             android:screenOrientation="landscape"
             ></activity>
+        <activity android:name=".OrderActivity"
+            android:screenOrientation="landscape"></activity>
 
 
     </application>

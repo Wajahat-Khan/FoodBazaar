@@ -8,32 +8,60 @@
         android:layout_margin="20dp"
         android:weightSum="100">
 
+    <LinearLayout
+        android:layout_weight="40"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
         <TextView
             android:id="@+id/order_item"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="25"
             android:gravity="center"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="20"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
         <TextView
 
             android:id="@+id/order_price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="25"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_weight="20"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
         <TextView
-            android:id="@+id/order_quantity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="25"
-            android:gravity="center"/>
 
+            android:id="@+id/order_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_weight="20"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
         <TextView
             android:id="@+id/order_total"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="25"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"/>
+    </LinearLayout>
+
     </LinearLayout>
