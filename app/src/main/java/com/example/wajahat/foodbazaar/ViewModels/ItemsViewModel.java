@@ -17,8 +17,10 @@ public class ItemsViewModel extends AndroidViewModel {
     private LiveData<List<Items>> allItems;
     private LiveData<List<Categories>> AllCategories;
 
+
     public LiveData<List<Items>> getAllItems(){return allItems;}
     public LiveData<List<Categories>> getAllCategories(){return AllCategories;}
+    public Items getItemById(int i){ return mRepository.getItemById(i); }
     //public void insert_item(Items item) { mRepository.insertItem(item); }
     //public void insert_category(Categories categories){mRepository.insertCategory(categories);}
 
