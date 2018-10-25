@@ -30,6 +30,8 @@ public class OrderActivity extends AppCompatActivity {
     private ItemsViewModel itemsViewModel;
     private HashMap<Items, Integer> ordered_items_list=new HashMap<>();
     private HashMap<Integer, Integer> temp;
+    int total;
+    TextView tt;
 
 
     @Override
@@ -54,7 +56,8 @@ public class OrderActivity extends AppCompatActivity {
         recyclerView.setAdapter(orderAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        orderAdapter.set_order(ordered_items_list);
+        tt=findViewById(R.id.order_total);
+
     }
 
 
@@ -72,8 +75,10 @@ public class OrderActivity extends AppCompatActivity {
         protected HashMap<Items, Integer> doInBackground(HashMap<Integer,Integer>... voids) {
 
             for ( final Map.Entry<Integer, Integer> entry :ord.entrySet() ) {
+                    Items temp=itemsViewModel.getItemById(entry.getKey());
 
-                ordered_items_list.put(itemsViewModel.getItemById(entry.getKey()), entry.getValue());
+                    ordered_items_list.put(temp, entry.getValue());
+                    total += temp.getPrice()*entry.getValue();
             }
 
             return ordered_items_list;
@@ -82,6 +87,8 @@ public class OrderActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(HashMap<Items, Integer> itemsIntegerHashMap) {
             super.onPostExecute(itemsIntegerHashMap);
+            orderAdapter.set_order(itemsIntegerHashMap);
+            tt.setText(Integer.toString(total));
         }
     }
 }

@@ -35,11 +35,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     private final LayoutInflater inflater;
     private Order order;
+    Context context;
     private HashMap<Items,Integer> ordered_items_list;
     List<Items> items = new ArrayList<>();
     List<Integer> count = new ArrayList<>();
     public OrderAdapter(Context context){
         inflater= LayoutInflater.from(context);
+        this.context=context;
     }
 
 
@@ -58,6 +60,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             holder.quantity.setText(Integer.toString(quant));
             holder.price.setText(Integer.toString(items.get(position).getPrice()));
             holder.total.setText(Integer.toString(items.get(position).getPrice()*quant));
+
         }
 
     }

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="@drawable/bkg">
 
     <TextView
         android:id="@+id/table_no"
@@ -26,6 +27,7 @@
 
         <TextView
             android:text="Item"
+            android:textColor="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="25"
@@ -35,6 +37,8 @@
 
         <TextView
             android:text="Price"
+
+            android:textColor="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="25"
@@ -44,6 +48,8 @@
 
         <TextView
             android:text="Quantity"
+
+            android:textColor="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="25"
@@ -53,6 +59,8 @@
 
         <TextView
             android:text="Total"
+
+            android:textColor="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="25"
@@ -64,7 +72,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#789">
+        >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/order_recycler_view"
@@ -75,6 +83,7 @@
 </LinearLayout>
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -83,6 +92,7 @@
 
         <TextView
             android:text="Total"
+            android:textColor="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="25"
@@ -96,6 +106,8 @@
 
         <TextView
             android:id="@+id/order_total"
+
+            android:textColor="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="25"
