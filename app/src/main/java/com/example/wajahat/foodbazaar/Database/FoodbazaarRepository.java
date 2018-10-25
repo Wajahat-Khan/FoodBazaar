@@ -32,10 +32,15 @@ public class FoodbazaarRepository {
         return allCategories;
     }
 
+    public Items getItemById(int i) {return itemsDao.getItemById(i); }
+
     public void insertItem (Items item) {
         new insertAsyncTask_item(itemsDao).execute(item);
     }
     public void insertCategory(Categories categories){new insertAsyncTask_cat(categoriesDao).execute(categories);}
+
+
+
 
     private static class insertAsyncTask_item extends AsyncTask<Items, Void, Void> {
 

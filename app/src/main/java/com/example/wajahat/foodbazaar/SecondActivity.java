@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -76,7 +75,7 @@ private RightListAdapter rightListAdapter;
                else
                {order_items_map.put(temp.getId(),default_quantity);
                }
-                Snackbar.make(view, temp.getName() + "ordered" + order_items_map.get(temp.getId())+ "times", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
             }
         });
                 rightRecylcerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -122,6 +121,7 @@ private RightListAdapter rightListAdapter;
 
                                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                                order_object.setOrder_list(order_items_map);
                                 order_object.setTable_no(Integer.parseInt(editText.getText().toString()));
                                 Intent intent=new Intent(getBaseContext(),OrderActivity.class);
                                 intent.putExtra("order_list",order_object);

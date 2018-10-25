@@ -52,14 +52,20 @@ public abstract class FoodbazaarDatabase extends RoomDatabase {
         protected Void doInBackground(final Void... params) {
             itemsDao.deleteAll();
             categoriesDao.deleteAll();
-            Items item = new Items(3,"ChickenBurger","a good burger","A very good burger. good burger",250,true,null
+            Items item = new Items(3,"Chicken Burger","a good burger","A very good burger. good burger",250,true,null
                     ,null,"chicken","burgers",4,"chicken,bun,salad");
             itemsDao.insert(item);
             item = new Items(4,"Beef Burger","a good burger","A very good burger. good burger",250,true,null
                     ,null,"chicken","burgers",4,"chicken,bun,salad");
             itemsDao.insert(item);
+            item = new Items(1,"Chicken Sandwich","a good burger","A very good burger. good burger",250,true,null
+                    ,null,"chicken","sandwich",4,"chicken,bun,salad");
+            itemsDao.insert(item);
+            item = new Items(2,"Beef Sandwich","a good burger","A very good burger. good burger",250,true,null
+                    ,null,"chicken","sandwich",4,"chicken,bun,salad");
+            itemsDao.insert(item);
 
-            Categories categories=new Categories(1,"Starters","Chicken Burger,Beef Burger,Fish Burger");
+            Categories categories=new Categories(1,"Burgers","Chicken Burger,Beef Burger,Fish Burger");
             categoriesDao.insert(categories);
             categories=new Categories(2,"Sandwiches","Chicken Sandwich,Beef Sandwich,Fish Sandwich");
             categoriesDao.insert(categories);

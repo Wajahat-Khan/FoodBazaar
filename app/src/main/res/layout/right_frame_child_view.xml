@@ -20,6 +20,7 @@
         >
 
         <TextView
+            android:textColor="#ffffff"
             android:textSize="25dp"
             android:textStyle="bold"
             android:id="@+id/food_title"
@@ -31,6 +32,7 @@
             android:layout_marginRight="0dp"
             />
         <TextView
+            android:textColor="#ffffff"
             android:textSize="15dp"
             android:textStyle="italic"
             android:layout_margin="5dp"
@@ -47,12 +49,13 @@
             android:gravity="center">
 
             <TextView
+                android:textColor="#ffffff"
                 android:id="@+id/food_price"
                 android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:text="asdc"/>
+                android:text="Rs 250"/>
             <Button
                 android:id="@+id/food_order_button"
                 android:layout_margin="5dp"
