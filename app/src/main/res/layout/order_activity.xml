@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@drawable/bkg">
+   >
 
     <TextView
         android:id="@+id/table_no"
@@ -27,7 +27,6 @@
 
         <TextView
             android:text="Item"
-            android:textColor="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="25"
@@ -38,7 +37,6 @@
         <TextView
             android:text="Price"
 
-            android:textColor="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="25"
@@ -49,7 +47,6 @@
         <TextView
             android:text="Quantity"
 
-            android:textColor="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="25"
@@ -60,7 +57,6 @@
         <TextView
             android:text="Total"
 
-            android:textColor="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="25"
