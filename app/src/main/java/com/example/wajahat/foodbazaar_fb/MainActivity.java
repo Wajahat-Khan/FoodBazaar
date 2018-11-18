@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.wajahat.foodbazaar_fb.Adapters.StartCategoriesAdapter;
 import com.example.wajahat.foodbazaar_fb.Data.Categories;
@@ -30,9 +31,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Categories> allCategories=new ArrayList<>();
-    private List<Items> order_list=new ArrayList<>();
-    private Order order_object=new Order();
+    private List<Categories> allCategories = new ArrayList<>();
+    private List<Items> order_list = new ArrayList<>();
+    private Order order_object = new Order();
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -46,8 +47,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_main);
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
 
         // Initialize Firebase components
 
@@ -223,23 +226,23 @@ public class MainActivity extends AppCompatActivity {
                 ,null,"Water","Cold Beverages",4,"Mineral Water",0);
         itemReference.child("37").setValue(item);
 */
-        categoriesrecyclerView=findViewById(R.id.all_categories);
+        categoriesrecyclerView = findViewById(R.id.all_categories);
 
-        startCategoriesAdapter=new StartCategoriesAdapter(this, new StartCategoriesAdapter.AdapterListener() {
+        startCategoriesAdapter = new StartCategoriesAdapter(this, new StartCategoriesAdapter.AdapterListener() {
             @Override
             public void onClick(View view, int position, List<Categories> cat) {
-                allCategories=cat;
-                Categories temp=allCategories.get(position);
-                String subCats=temp.getSub_categories();
-                String name=temp.getName();
-                String subCategories[]=subCats.split(",");
-                Intent intent=new Intent(getBaseContext(), com.example.wajahat.foodbazaar_fb.SecondActivity.class);
+                allCategories = cat;
+                Categories temp = allCategories.get(position);
+                String subCats = temp.getSub_categories();
+                String name = temp.getName();
+                String subCategories[] = subCats.split(",");
+                Intent intent = new Intent(getBaseContext(), com.example.wajahat.foodbazaar_fb.SecondActivity.class);
                 order_object.setOrder_list(order_list);
 
-                intent.putExtra("order_list",  order_object);
-              intent.putExtra("subCategories",subCategories);
-              intent.putExtra("category",name);
-              startActivityForResult(intent, 1);
+                intent.putExtra("order_list", order_object);
+                intent.putExtra("subCategories", subCategories);
+                intent.putExtra("category", name);
+                startActivityForResult(intent, 1);
             }
 
             @Override
@@ -260,11 +263,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        childEventListener=new ChildEventListener() {
+        childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Categories category=dataSnapshot.getValue(Categories.class);
-                 allCategories.add(category);
+                Categories category = dataSnapshot.getValue(Categories.class);
+                allCategories.add(category);
                 startCategoriesAdapter.setCategories(allCategories);
             }
 
@@ -291,15 +294,16 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addChildEventListener(childEventListener);
         //startCategoriesAdapter.setCategories(allCategories);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1){
-            if(resultCode== Activity.RESULT_OK){
-                Bundle bundle=data.getExtras();
-                if(bundle!=null){
-                    order_object=(Order) bundle.getSerializable("order_list");
-                    order_list=order_object.getOrder_list();
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bundle bundle = data.getExtras();
+                if (bundle != null) {
+                    order_object = (Order) bundle.getSerializable("order_list");
+                    order_list = order_object.getOrder_list();
                 }
             }
         }
@@ -330,6 +334,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        System.exit(1);
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
     }
 }

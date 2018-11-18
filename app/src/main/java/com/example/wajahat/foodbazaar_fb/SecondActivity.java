@@ -57,7 +57,7 @@ public class SecondActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
@@ -66,15 +66,23 @@ public class SecondActivity extends AppCompatActivity {
         order_object= (Order) bundle.get("order_list");
         Total=order_object.getTotal();
         order_list=order_object.getOrder_list();
+        if(order_list==null){
+            Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            for (int h=0;h<order_list.size();h++){
+                Toast.makeText(this, order_list.get(h).getName()+order_list.get(h).getQuantity(), Toast.LENGTH_SHORT).show();
+            }
+        }
         category_selected=bundle.getString("category");
         Total=order_object.getTotal();
 
         // Initialize Firebase components
 
-            firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
-            databaseReference = firebaseDatabase.getReference().child("Items");
-            databaseReference.keepSynced(true);
+        databaseReference = firebaseDatabase.getReference().child("Items");
+        databaseReference.keepSynced(true);
 
 
         rightRecylcerView=findViewById(R.id.right_frame_recycler_view);
@@ -84,9 +92,29 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position, List<Items> it) {
                 items=it;
+                int check_flag=0;
                 Items temp=items.get(position);
+                String item_name=temp.getName();
+                for( Items iterator : order_list) {
+                    if (iterator.getName().equals(item_name)) {
+                        quantity = iterator.getQuantity();
+                        quantity++;
+                        iterator.setQuantity(quantity);
+                        Total += temp.getPrice();
+                        check_flag=1;
+                        Toast.makeText(SecondActivity.this, temp.getName() + " added to cart", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
-                if(order_list.contains(temp)) {
+                if(check_flag==0){
+                    temp.setQuantity(default_quantity);
+                    Total+=temp.getPrice();
+                    order_list.add(temp);
+                    Toast.makeText(SecondActivity.this, temp.getName() + " added to cart", Toast.LENGTH_SHORT).show();
+                }
+
+
+                /*if(order_list.contains(temp)) {
                     index=order_list.indexOf(temp);
                     temp=order_list.get(index);
                     quantity=temp.getQuantity();
@@ -96,14 +124,7 @@ public class SecondActivity extends AppCompatActivity {
                     order_list.add(temp);
                     Total+=temp.getPrice();
                     Toast.makeText(SecondActivity.this, temp.getName()+ " added to cart", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    temp.setQuantity(default_quantity);
-                    Total+=temp.getPrice();
-                    order_list.add(temp);
-                    Toast.makeText(SecondActivity.this, temp.getName() + " added to cart", Toast.LENGTH_SHORT).show();
-                }
+                }*/
 
             }
         });
@@ -117,14 +138,14 @@ public class SecondActivity extends AppCompatActivity {
                 sub_categories=categories;
                 String sub_cat=sub_categories[position];
                 if(sub_cat.equals(category_selected)) {
-                rightListAdapter.setItems(items);
+                    rightListAdapter.setItems(items);
                 }
                 final List<Items> new_it=new ArrayList<>();
                 databaseReference.orderByChild("sub_category").equalTo(sub_cat).addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         Items item=dataSnapshot.getValue(Items.class);
-                       // Toast.makeText(SecondActivity.this, item.getName(), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(SecondActivity.this, item.getName(), Toast.LENGTH_SHORT).show();
                         new_it.add(item);
                         rightListAdapter.setItems(new_it);
                         //rightListAdapter.notifyDataSetChanged();
@@ -168,7 +189,7 @@ public class SecondActivity extends AppCompatActivity {
                                         order_object.setTotal(Total);
                                         Intent intent=new Intent(getBaseContext(),OrderActivity.class);
                                         intent.putExtra("order_list", order_object);
-                                         startActivityForResult(intent,1);
+                                        startActivityForResult(intent,1);
                                     }
                                 });
 
@@ -189,35 +210,35 @@ public class SecondActivity extends AppCompatActivity {
 
             }
         });
-            leftMasterAdpater.setCategories(getIntent().getStringArrayExtra("subCategories"));
-            databaseReference.orderByChild("major_category").equalTo(category_selected).addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    Items item=dataSnapshot.getValue(Items.class);
-                    items.add(item);
-                    rightListAdapter.setItems(items);
-                }
+        leftMasterAdpater.setCategories(getIntent().getStringArrayExtra("subCategories"));
+        databaseReference.orderByChild("major_category").equalTo(category_selected).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Items item=dataSnapshot.getValue(Items.class);
+                items.add(item);
+                rightListAdapter.setItems(items);
+            }
 
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                }
+            }
 
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-                }
+            }
 
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+            }
+        });
     }
 
     @Override
