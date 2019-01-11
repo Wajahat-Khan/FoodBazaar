@@ -22,7 +22,7 @@
         >
 
         <TextView
-
+            android:textColor="#DCDCDC"
             android:textSize="25dp"
             android:textStyle="bold"
             android:id="@+id/food_title"
@@ -34,7 +34,7 @@
             android:layout_marginRight="0dp"
             />
         <TextView
-
+            android:textColor="#DCDCDC"
             android:textSize="15dp"
             android:textStyle="italic"
             android:layout_margin="5dp"
@@ -51,7 +51,7 @@
         android:gravity="center">
 
         <TextView
-
+            android:textColor="#DCDCDC"
             android:id="@+id/food_price"
             android:layout_margin="5dp"
             android:layout_width="wrap_content"

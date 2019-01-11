@@ -1,74 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:weightSum="100"
-    android:orientation="vertical"
-
+    android:background="@drawable/app_bkg"
     >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="80"
-        android:weightSum="100">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:layout_weight="75"
-
-            android:gravity="center">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/left_frame_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                >
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:layout_weight="25"
-            >
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/right_frame_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="20"
-        android:gravity="center_horizontal"
-
+        android:orientation="vertical"
+        android:weightSum="100"
         >
-
-        <FrameLayout
-            android:id="@+id/top_frame"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="0dp"
+            android:layout_weight="10"/>
+
+            <LinearLayout
+                android:id="@+id/main_second"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="80"
+                android:alpha="0.4"
+                android:orientation="horizontal"
+                android:weightSum="100"
+                >
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/left_frame_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="30">
 
 
-            >
+                    </android.support.v7.widget.RecyclerView>
 
-            <Button
-                android:id="@+id/order_now"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/right_frame_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70"
+                    android:padding="10dp">
+                </android.support.v7.widget.RecyclerView>
 
-                android:text="Order Now" />
-        </FrameLayout>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:gravity="center">
+        <Button
+            android:id="@+id/order_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+
+            android:text="Order Now" />
+        </LinearLayout>
+
+
+
     </LinearLayout>
-</LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

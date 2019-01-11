@@ -1,11 +1,13 @@
 package com.example.wajahat.foodbazaar_fb;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,15 +54,18 @@ public class SecondActivity extends AppCompatActivity {
     final int default_quantity=1;
     private int quantity;
     Order order_object;
-
     List<Items> order_list;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
+    @SuppressLint("Range")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
+        View bkg=findViewById(R.id.main_second);
+        bkg.setBackgroundColor(Color.parseColor("#000000"));
+        bkg.setAlpha((float) 0.8);
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
         order_object= (Order) bundle.get("order_list");
