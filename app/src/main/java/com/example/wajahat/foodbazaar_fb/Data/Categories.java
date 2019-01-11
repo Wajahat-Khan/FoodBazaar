@@ -4,11 +4,13 @@ public class Categories {
     private int id;
     private String name;
     private String sub_categories;
+    private String picture;
 
-    public Categories(int id, String name, String sub_categories){
+    public Categories(int id, String name, String sub_categories, String picture){
         this.id=id;
         this.name=name;
         this.sub_categories=sub_categories;
+        this.picture=picture;
     }
     public Categories(){
 
@@ -36,5 +38,13 @@ public class Categories {
 
     public void setSub_categories(String sub_categories) {
         this.sub_categories = sub_categories;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

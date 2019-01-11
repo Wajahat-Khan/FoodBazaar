@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.wajahat.foodbazaar_fb.Data.Categories;
 import com.example.wajahat.foodbazaar_fb.R;
 
@@ -20,11 +23,11 @@ public class StartCategoriesAdapter extends RecyclerView.Adapter<StartCategories
         void onClick(View catView, int adapterPosition);
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private Button cat_button;
+       private ImageView cat_button;
         public ViewHolder(View catView) {
             super(catView);
 
-            cat_button=catView.findViewById(R.id.categories_buttons);
+            cat_button=catView.findViewById(R.id.category_icon);
             cat_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -36,10 +39,12 @@ public class StartCategoriesAdapter extends RecyclerView.Adapter<StartCategories
     private final LayoutInflater inflater;
     private List<Categories> allCategories;
     public AdapterListener myAdapterListener;
+    private Context context;
 
     public StartCategoriesAdapter(Context context, AdapterListener listener){
         inflater=LayoutInflater.from(context);
         myAdapterListener=listener;
+        this.context=context;
     }
     @Override
     public StartCategoriesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,13 +56,17 @@ public class StartCategoriesAdapter extends RecyclerView.Adapter<StartCategories
     public void onBindViewHolder(StartCategoriesAdapter.ViewHolder holder, int position) {
         if(allCategories!=null){
             Categories current=allCategories.get(position);
-            holder.cat_button.setText(current.getName().toString());
+            Glide.with(context).load(current.getPicture()).into(holder.cat_button);
+        }
+        else{
+            Toast.makeText(context, "no cats", Toast.LENGTH_SHORT).show();
         }
 
     }
     public void setCategories(List<Categories> categories){
         this.allCategories=categories;
         notifyDataSetChanged();
+
     }
 
     public List<Categories> getAllCategories(){

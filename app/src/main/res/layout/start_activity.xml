@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FOOD BAZAAR"
+        android:text="FOOD Struck"
         android:textSize="30dp"
         android:textStyle="bold"
         android:layout_marginTop="80dp"
@@ -18,7 +18,7 @@
         android:layout_weight="30"
         />
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/all_categories"
+        android:id="@+id/all_categories-1"
         android:layout_weight="90"
         android:scrollbars="vertical"
         android:layout_width="wrap_content"
