@@ -273,21 +273,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         childEventListener = new ChildEventListener() {
-            int flag=0;
+
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Categories category = dataSnapshot.getValue(Categories.class);
                 allCategories.add(category);
                 startCategoriesAdapter.setCategories(allCategories);
-               flag++;
-               if(flag==2){
-                   categoriesrecyclerView.scrollToPosition(1);
-                   startCategoriesAdapter.notifyDataSetChanged();
-               }
-               else{
-                   categoriesrecyclerView.scrollToPosition(2);
-                   startCategoriesAdapter.notifyDataSetChanged();
-               }
+
 
             }
 

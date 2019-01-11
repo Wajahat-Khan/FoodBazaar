@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/category_icon"
-        android:layout_width="220px"
-        android:layout_height="210px"
+        android:layout_width="240px"
+        android:layout_height="230px"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"/>
 
