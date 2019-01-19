@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+
+<Button
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/left_item_btn"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    android:textColor="#DCDCDC"
+    android:fontFamily="sans-serif-condensed"
+    android:textSize="22sp"
+    android:textAlignment="viewEnd"
+    android:paddingRight="15dp"
+    android:layout_gravity="center_vertical"
+    tools:ignore="RtlCompat"
+    android:background="@drawable/ripple_effect"
 
-    <Button
-        android:id="@+id/left_item_btn"
-        android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        android:layout_height="wrap_content"
+    />
 
-
-        />
-
-</LinearLayout>

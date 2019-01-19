@@ -33,6 +33,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.ncorti.slidetoact.SlideToActView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -65,7 +68,7 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.content_main);
         View bkg=findViewById(R.id.main_second);
         bkg.setBackgroundColor(Color.parseColor("#000000"));
-        bkg.setAlpha((float) 0.8);
+        bkg.getBackground().setAlpha(60);
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
         order_object= (Order) bundle.get("order_list");
@@ -137,6 +140,7 @@ public class SecondActivity extends AppCompatActivity {
         rightRecylcerView.setAdapter(rightListAdapter);
         rightRecylcerView.setLayoutManager(new LinearLayoutManager(this));
 
+
         leftMasterAdpater=new LeftMasterAdpater(this, category_selected, new LeftMasterAdpater.LeftMasterListener() {
             @Override
             public void onClick(View view, int position, String[] categories) {
@@ -168,11 +172,57 @@ public class SecondActivity extends AppCompatActivity {
 
             }
         });
+
         leftRecyclerView.setAdapter(leftMasterAdpater);
         leftRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+        final SlideToActView order_now= (SlideToActView) findViewById(R.id.complete_order);
 
+        order_now.setOnSlideCompleteListener(new SlideToActView.OnSlideCompleteListener() {
+            @Override
+            public void onSlideComplete(@NotNull SlideToActView slideToActView) {
+                order_now.resetSlider();
+                AlertDialog.Builder dialog=new AlertDialog.Builder(SecondActivity.this);
+                final EditText editText = new EditText(SecondActivity.this);
+                editText.setInputType(InputType.TYPE_CLASS_PHONE);
+                editText.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+
+                dialog.setTitle("Table No: ")
+                        .setPositiveButton("ok",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast.makeText(SecondActivity.this, editText.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                                        order_object.setOrder_list(order_list);
+                                        order_object.setTable_no(Integer.parseInt(editText.getText().toString()));
+                                        order_object.setTotal(Total);
+                                        Intent intent=new Intent(getBaseContext(),OrderActivity.class);
+                                        intent.putExtra("order_list", order_object);
+                                        startActivityForResult(intent,1);
+                                    }
+                                });
+
+                dialog.setNegativeButton("cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                            }
+                        });
+
+                dialog.setView(editText);
+                dialog.create().show();
+
+                editText.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+            }
+        });
+        /*
         findViewById(R.id.order_now).setOnClickListener(new View.OnClickListener() {
             String table_no="";
             @Override
@@ -214,7 +264,9 @@ public class SecondActivity extends AppCompatActivity {
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
             }
+
         });
+        */
         leftMasterAdpater.setCategories(getIntent().getStringArrayExtra("subCategories"));
         databaseReference.orderByChild("major_category").equalTo(category_selected).addChildEventListener(new ChildEventListener() {
             @Override

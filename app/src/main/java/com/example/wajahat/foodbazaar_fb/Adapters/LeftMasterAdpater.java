@@ -10,12 +10,14 @@ import android.widget.Button;
 
 import com.example.wajahat.foodbazaar_fb.R;
 
+
 public class LeftMasterAdpater extends RecyclerView.Adapter<LeftMasterAdpater.LeftViewHolder> {
 
     public interface LeftMasterListener { void onClick(View view, int position, String[] categories);
     }
     public class LeftViewHolder extends RecyclerView.ViewHolder{
         private Button cat_button;
+
         public LeftViewHolder(View catView) {
             super(catView);
 
@@ -50,8 +52,9 @@ public class LeftMasterAdpater extends RecyclerView.Adapter<LeftMasterAdpater.Le
         if(categories!=null){
             String current=categories[position];
             if(current.equals(main_category)){
-                holder.cat_button.setBackgroundColor(Color.parseColor("#214587"));
-                holder.cat_button.setTextColor(Color.parseColor("#ffffff"));
+                holder.cat_button.setBackgroundColor(Color.parseColor("#D4AF37"));
+                holder.cat_button.setTextColor(Color.parseColor("#DCDCDC"));
+
             }
             holder.cat_button.setText(current);
         }

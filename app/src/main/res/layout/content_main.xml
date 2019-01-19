@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_bkg"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/app_bkg_2">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,40 +20,56 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="80"
-                android:alpha="0.4"
                 android:orientation="horizontal"
                 android:weightSum="100"
+                android:gravity="center"
                 >
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/left_frame_recycler_view"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="30">
+                    android:orientation="vertical"
+                    android:layout_weight="30"
+                    android:gravity="center_vertical"
+                    >
 
-
+                    <android.support.v7.widget.RecyclerView
+                    android:id="@+id/left_frame_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    >
                     </android.support.v7.widget.RecyclerView>
-
+                </LinearLayout>
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/right_frame_recycler_view"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="70"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    >
                 </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="10"
             android:gravity="center">
-        <Button
-            android:id="@+id/order_now"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center"
-
-            android:text="Order Now" />
+            <com.ncorti.slidetoact.SlideToActView
+                android:id="@+id/complete_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginRight="150dp"
+                android:elevation="8dp"
+                app:area_margin="8dp"
+                app:outer_color="@color/gold"
+                app:inner_color="#fff"
+                app:text_style="italic"
+                app:slider_height="50dp"
+                app:text="Complete Order"
+                />
         </LinearLayout>
 
 
