@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:background="@drawable/app_bkg_2"
 
     >
 
@@ -16,7 +17,7 @@
         android:textSize="30dp"
         android:textStyle="bold"
         android:layout_margin="20dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#DCDCDC"
         />
 
     <LinearLayout
@@ -34,7 +35,8 @@
             android:layout_weight="25"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="#DCDCDC"/>
 
         <TextView
             android:text="Price"
@@ -45,7 +47,8 @@
             android:layout_weight="25"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="#DCDCDC"/>
 
         <TextView
             android:text="Quantity"
@@ -56,7 +59,8 @@
             android:layout_weight="25"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="#DCDCDC"/>
 
         <TextView
             android:text="Total"
@@ -67,7 +71,8 @@
             android:layout_weight="25"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="#DCDCDC"/>
     </LinearLayout>
 
     <LinearLayout
@@ -99,7 +104,8 @@
             android:layout_weight="25"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="#DCDCDC"/>
 
 
        <LinearLayout
@@ -113,10 +119,11 @@
            <Button
                android:id="@+id/confirm_order"
                android:text="Confirm Order"
-               android:textColor="#ffffff"
+               android:textColor="#DCDCDC"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:background="@color/colorPrimary"
+               android:background="@color/gold"
+               android:gravity="center"
                />
 
        </LinearLayout>
@@ -129,7 +136,8 @@
             android:gravity="center"
             android:text="Total"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#DCDCDC"/>
 
     </LinearLayout>
 

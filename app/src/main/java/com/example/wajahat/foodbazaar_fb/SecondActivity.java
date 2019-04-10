@@ -97,8 +97,10 @@ public class SecondActivity extends AppCompatActivity {
         leftRecyclerView=findViewById(R.id.left_frame_recycler_view);
 
         rightListAdapter  = new RightListAdapter(this, new RightListAdapter.MyAdapterListener() {
+
+
             @Override
-            public void onClick(View view, int position, List<Items> it) {
+            public void onClick(View view, int position, List<Items> it, int count) {
                 items=it;
                 int check_flag=0;
                 Items temp=items.get(position);

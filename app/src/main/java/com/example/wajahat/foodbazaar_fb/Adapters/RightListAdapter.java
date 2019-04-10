@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
@@ -18,14 +20,18 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.wajahat.foodbazaar_fb.Data.Items;
 import com.example.wajahat.foodbazaar_fb.GlideApp;
 import com.example.wajahat.foodbazaar_fb.R;
+import com.example.wajahat.foodbazaar_fb.SecondActivity;
 
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class RightListAdapter extends RecyclerView.Adapter<RightListAdapter.RightViewHolder> {
-    public interface MyAdapterListener { void onClick(View view, int position, List<Items> items);
+    public interface MyAdapterListener { void onClick(View view, int position, List<Items> items, int count);
+
+
     }
+
 
     public class RightViewHolder extends RecyclerView.ViewHolder {
         private ImageView foodImage;
@@ -34,17 +40,19 @@ public class RightListAdapter extends RecyclerView.Adapter<RightListAdapter.Righ
         private TextView price;
         private Button order_button;
 
-        public RightViewHolder(View itemView) {
+        public RightViewHolder(final View itemView) {
             super(itemView);
             foodImage = itemView.findViewById(R.id.food_image);
             title = itemView.findViewById(R.id.food_title);
             description = itemView.findViewById(R.id.food_description);
             price = itemView.findViewById(R.id.food_price);
+
             order_button = itemView.findViewById(R.id.food_order_button);
             order_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    myAdapterListener.onClick(view, getAdapterPosition(),getItems());
+                    myAdapterListener.onClick(view, getAdapterPosition(),getItems(),count);
+                    count=1;
                 }
             });
         }
@@ -54,10 +62,12 @@ public class RightListAdapter extends RecyclerView.Adapter<RightListAdapter.Righ
     private final LayoutInflater inflater;
     private List<Items> items;
     Context co;
+    int count=1;
     public RightListAdapter(Context context, MyAdapterListener listener){
         inflater=LayoutInflater.from(context);
         this.myAdapterListener=listener;
         co=context;
+
     }
 
     @Override
